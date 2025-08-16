@@ -1,0 +1,38 @@
+name: Deploy to S3 + CloudFront
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to S3
+        uses: aws-actions/s3-sync@v2
+        with:
+          bucket: ${{ github.ref == 'refs/heads/main' && 'cubscout-pack365-prod' || 'cubscout-pack365-staging' }}
+          source-dir: dist
+          delete: true
+
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        with:
+          distribution-id: ${{ github.ref == 'refs/heads/main' && secrets.CLOUDFRONT_PROD_ID || secrets.CLOUDFRONT_STAGING_ID }}
+          paths: "/*"
+          aws-region: us-east-1
