@@ -2,9 +2,7 @@ name: Deploy to S3 + CloudFront
 
 on:
   push:
-    branches:
-      - main
-      - staging
+    branches: [ main, staging ]
 
 jobs:
   deploy:
@@ -23,16 +21,21 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to S3
-        uses: aws-actions/s3-sync@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          bucket: ${{ github.ref == 'refs/heads/main' && 'cubscout-pack365-prod' || 'cubscout-pack365-staging' }}
-          source-dir: dist
-          delete: true
-
-      - name: Invalidate CloudFront
-        uses: chetan/invalidate-cloudfront-action@v2
-        with:
-          distribution-id: ${{ github.ref == 'refs/heads/main' && secrets.CLOUDFRONT_PROD_ID || secrets.CLOUDFRONT_STAGING_ID }}
-          paths: "/*"
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+
+      - name: Deploy to Staging
+        if: github.ref == 'refs/heads/staging'
+        run: |
+          aws s3 sync dist s3://pack365-staging --delete
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_STAGING_ID }} --paths "/*"
+
+      - name: Deploy to Prod
+        if: github.ref == 'refs/heads/main'
+        run: |
+          aws s3 sync dist s3://pack365-prod --delete
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_PROD_ID }} --paths "/*"
