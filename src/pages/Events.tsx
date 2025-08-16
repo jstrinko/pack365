@@ -26,6 +26,7 @@ const events = [
   },
 ];
 
+
 export default function Events() {
   const [view, setView] = useState<"month" | "week" | "day" | "agenda">("month");
   const [date, setDate] = useState(new Date());
