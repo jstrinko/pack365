@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Calendar, dateFnsLocalizer, Views } from "react-big-calendar";
+import { useState } from "react";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import { enUS } from "date-fns/locale/en-US";
 import "react-big-calendar/lib/css/react-big-calendar.css";
