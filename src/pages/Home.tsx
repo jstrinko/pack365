@@ -15,7 +15,9 @@ export default function Home() {
       <section className="mb-8">
         <h3 className="text-xl font-semibold mb-2">Join Us!</h3>
         <p>Fill out this form to be contacted about joining Pack 365.</p>
-        <SignupForm />
+        <div className="w-full flex justify-center">
+          <SignupForm />
+        </div>
       </section>
 
       <section className="mb-8">

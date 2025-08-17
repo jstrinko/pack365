@@ -3,18 +3,21 @@ const web3formsKey = '5756f720-2637-4245-96de-047aba9d59c3'
 export default function SignupForm() {
   return (
     <form
-      className="max-w-auto mx-auto bg-white p-6 rounded-xl shadow-lg space-y-5"
+      className="w-full max-w-8xl bg-gradient-to-br from-yellow-50 via-yellow-100 to-yellow-50 p-6 sm:p-8 rounded-2xl shadow-xl space-y-6"
       action="https://api.web3forms.com/submit"
       method="POST"
     >
       <input type="hidden" name="access_key" value={web3formsKey} />
       <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
-      <h2 className="text-2xl font-bold text-blue-700 mb-2 text-center">Join Pack 365!</h2>
-      <p className="text-center text-gray-600 mb-4">
-        Fill out this form to get your child started on a fun scouting adventure.
+      <h2 className="text-3xl font-extrabold text-blue-700 mb-2 text-center drop-shadow-md">
+        Join Pack 365!
+      </h2>
+      <p className="text-center text-gray-700 mb-4">
+        Fill out this form to get your child started on a <span className="font-semibold text-blue-600">fun scouting adventure</span>.
       </p>
 
+      {/* Inputs */}
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
           Your Name
@@ -23,7 +26,7 @@ export default function SignupForm() {
           type="text"
           name="name"
           placeholder="John Doe"
-          className="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
+          className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition transform focus:scale-105"
           required
         />
       </div>
@@ -34,7 +37,7 @@ export default function SignupForm() {
         </label>
         <select
           name="grade"
-          className="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
+          className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition transform focus:scale-105"
           required
         >
           <option value="">Select Grade</option>
@@ -55,19 +58,19 @@ export default function SignupForm() {
           type="email"
           name="email"
           placeholder="you@example.com"
-          className="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
+          className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition transform focus:scale-105"
           required
         />
       </div>
 
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white font-semibold py-3 rounded-md hover:bg-blue-700 transition-transform transform hover:scale-105"
+        className="w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-transform transform hover:scale-110 hover:shadow-lg"
       >
-        Submit
+        🚀 Submit & Join the Adventure!
       </button>
 
-      <p className="text-center text-gray-500 text-sm mt-2">
+      <p className="text-center text-gray-600 text-sm mt-2">
         We can’t wait to welcome your scout to the adventure!
       </p>
     </form>
