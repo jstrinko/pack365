@@ -1,10 +1,12 @@
 import PageLayout from "../components/PageLayout";
+import SignupForm from './Home/SignupForm';
 
 export default function Events() {
   return (
     <PageLayout>
-      <h2 className="text-2xl font-bold mb-4">Events</h2>
-      <p>[Event calendar goes here]</p>
+      <section className="mb-8 min-w-2xl">
+        <SignupForm />
+      </section>
     </PageLayout>
   );
 }
