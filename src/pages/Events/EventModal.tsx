@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import type { Event } from "./EventCalendar"; // Adjust the import path as necessary
 
