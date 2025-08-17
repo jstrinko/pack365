@@ -74,7 +74,7 @@ export default function EventCalendar() {
   }, []);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6">
+    <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-white rounded-2xl shadow-xl p-6">
       <div style={{ height: 600 }}>
         <Calendar
           localizer={localizer}
