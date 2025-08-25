@@ -2,8 +2,8 @@
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import PageLayout from "../components/PageLayout";
 import EventCalendar from './Events/EventCalendar';
-import EventSlideShow from './Events/EventSlideShow';
-import { eventList } from './Events/Data';
+import EventSlideShowContainer from './Events/EventSlideShowContainer';
+
 
 export default function Events() {
   return (
@@ -14,7 +14,7 @@ export default function Events() {
         <EventCalendar />
       </section>
       <section className="relative w-full max-w-3xl mx-auto overflow-hidden rounded-2xl shadow-lg">
-        <EventSlideShow events={eventList} />
+        <EventSlideShowContainer />
       </section>
     </PageLayout>
   );

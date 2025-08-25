@@ -20,6 +20,7 @@ export type SlideShowProps = {
   eventInterval?: number; // ms; default 5000
   photoInterval?: number; // ms; default 2000
   className?: string;
+  fullScreen?: boolean;
 };
 
 const clampIndex = (i: number, len: number) => ((i % len) + len) % len;
@@ -29,6 +30,7 @@ export default function EventSlideshow({
   eventInterval = 6000,
   photoInterval = 2000,
   className = "",
+  fullScreen = false,
 }: SlideShowProps) {
   const totalEvents = events.length;
   const [eventIndex, setEventIndex] = useState(0);
@@ -157,10 +159,10 @@ export default function EventSlideshow({
 
   return (
     <div
-      className={`relative w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl bg-white group ${className}`}
+      className={fullScreen ? `fixed inset-0 z-50 w-full h-full bg-white` : `relative w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl bg-white group ${className}`}
     >
       {/* Image area */}
-      <div className="relative h-[28rem] md:h-[32rem] bg-gray-100">
+      <div className={fullScreen ? `relative w-full h-[50rem] bg-gray-100` : `relative h-[28rem] md:h-[32rem] bg-gray-100`}>
         <AnimatePresence custom={eventDir} mode="wait">
           {/* Wrap event layer so that changing events triggers a subtle slide */}
           <motion.div
@@ -241,7 +243,7 @@ export default function EventSlideshow({
       </div>
 
       {/* Info panel */}
-      <div className="p-4 md:p-6">
+      <div className="p-4 md:p-6 bg-white">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
           <div>
             <motion.h3
