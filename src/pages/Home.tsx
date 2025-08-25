@@ -29,7 +29,7 @@ export default function Home() {
       <section className="w-full mx-auto mb-8 max-w-3xl">
         <h3 className="text-xl font-semibold mb-2">Events</h3>
         <p>Here are the exciting campouts, meetups, and ceremonies scheduled for this scouting year! Join us for a ton of fun!</p>
-        <div style={{ height: 650 }}><EventCalendar /></div>
+        <div><EventCalendar /></div>
       </section>
 
       <section className="relative w-full max-w-3xl mx-auto overflow-hidden rounded-2xl shadow-lg">
