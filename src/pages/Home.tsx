@@ -1,6 +1,8 @@
 import PageLayout from "../components/PageLayout";
 import SignupForm from './Home/SignupForm';
 import EventCalendar from './Events/EventCalendar';
+import EventSlideshow from "./Events/EventSlideShow";
+import { eventList } from './Events/Data';
 
 export default function Home() {
   return (
@@ -54,9 +56,12 @@ export default function Home() {
       <section className="mb-8">
         <h3 className="text-xl font-semibold mb-2">Events</h3>
         <p>Here are the exciting campouts, meetups, and ceremonies scheduled for this scouting year! Join us for a ton of fun!</p>
-        <div style={{ height: 600 }}><EventCalendar /></div>
+        <div style={{ height: 650 }}><EventCalendar /></div>
       </section>
 
+      <section className="mb-8">
+        <EventSlideshow events={eventList} />
+      </section>
 
     </PageLayout>
   );
