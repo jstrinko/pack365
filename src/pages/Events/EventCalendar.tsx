@@ -30,7 +30,7 @@ export default function EventCalendar() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const timeMin = new Date().toISOString();
+    const timeMin = new Date(2000, 0, 1).toISOString(); 
     const fullUrl = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${GoogleCalendarAPIKey}&timeMin=${timeMin}&singleEvents=true&orderBy=startTime`;
     fetch(fullUrl)
       .then((response) => response.json())

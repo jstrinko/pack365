@@ -9,7 +9,7 @@ type PageLayoutProps = {
 
 export default function PageLayout({ children, heroImage, heroAlt }: PageLayoutProps) {
   if (!heroImage) {
-    const num = Math.floor(Math.random() * 9) + 1;
+    const num = Math.floor(Math.random() * 8) + 1;
     heroImage = `./scouts${num}.jpg`;
   }
   return (
