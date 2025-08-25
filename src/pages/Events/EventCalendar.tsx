@@ -17,7 +17,6 @@ export type Event = {
   description?: string;
 };
 
-
 const GoogleCalendarAPIKey = 'AIzaSyCRqQUsiiwCzUGXU3loavI_g2A-NYiaWR0';
 //const calendarId = 'mlb_-m-02%7e_%7e_x_%4diami+%4darlins#sports@group.v.calendar.google.com';
 const calendarId = 'e28c365873c5d4d1a66a9a90570f7bd6c4fc56ae9724a64f77acf53361bd81e1@group.calendar.google.com';
@@ -28,7 +27,7 @@ export default function EventCalendar() {
   const [date, setDate] = useState(new Date());
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-
+  
   useEffect(() => {
     const timeMin = new Date(2000, 0, 1).toISOString(); 
     const fullUrl = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${GoogleCalendarAPIKey}&timeMin=${timeMin}&singleEvents=true&orderBy=startTime`;
@@ -75,27 +74,30 @@ export default function EventCalendar() {
 
   return (
     <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-white rounded-2xl shadow-xl p-6">
-      <div style={{ height: 600 }}>
-        <Calendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: "100%" }}
-          view={view}
-          onView={(v) => setView(v as "month" | "week" | "day" | "agenda")}
-          date={date}
-          onNavigate={(d) => setDate(d)}
-          views={["month", "week", "day", "agenda"]}
-          onSelectEvent={(event) => {
-            setSelectedEvent(event);
-            setIsOpen(true);
-          }}
-        />
-        {selectedEvent && (
-          <EventModal event={selectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />
-        )}
+      <div className="w-full overflow-x-auto">
+        <div className="min-w-[300px]" style={{ height: 600 }}>
+          <Calendar
+            localizer={localizer}
+            events={events}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: "100%" }}
+            view={view}
+            onView={(v) => setView(v as "month" | "week" | "day" | "agenda")}
+            date={date}
+            onNavigate={(d) => setDate(d)}
+            views={["month", "week", "day", "agenda"]}
+            onSelectEvent={(event) => {
+              setSelectedEvent(event);
+              setIsOpen(true);
+            }}
+          />
+        </div>
       </div>
+
+      {selectedEvent && (
+        <EventModal event={selectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />
+      )}
     </div>
   );
 }
