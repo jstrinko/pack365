@@ -74,6 +74,17 @@ export default function EventCalendar() {
 
   return (
     <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-white rounded-2xl shadow-xl p-6">
+      <div className="mb-4">
+        Add this calendar to your Google Calendar:{" "}
+        <a
+          href={`https://calendar.google.com/calendar/u/0?cid=ZTI4YzM2NTg3M2M1ZDRkMWE2NmE5YTkwNTcwZjdiZDZjNGZjNTZhZTk3MjRhNjRmNzdhY2Y1MzM2MWJkODFlMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline"
+        >
+          Subscribe
+        </a>
+      </div>
       <div className="w-full overflow-x-auto">
         <div className="min-w-[300px]" style={{ height: 600 }}>
           <Calendar
