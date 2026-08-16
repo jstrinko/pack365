@@ -13,6 +13,11 @@ export default function Events() {
         <p>Here are the exciting campouts, meetups, and ceremonies scheduled for this scouting year! Join us for a ton of fun!</p>
         <EventCalendar />
       </section>
+      <section className="w-full max-w-3xl mx-auto mb-2 text-right">
+        <a href="/gallery" className="text-blue-600 hover:underline font-semibold">
+          Browse all photos in the Gallery →
+        </a>
+      </section>
       <section className="relative w-full max-w-3xl mx-auto overflow-hidden rounded-2xl shadow-lg">
         <EventSlideShowContainer />
       </section>

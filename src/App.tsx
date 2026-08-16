@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
+import Gallery from "./pages/Gallery";
 import Signup from "./pages/Signup";
 import Info from "./pages/Info";
 import Dens from "./pages/Dens";
@@ -14,6 +15,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/info" element={<Info />} />
         <Route path="/dens" element={<Dens />} />
