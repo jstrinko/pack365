@@ -127,6 +127,14 @@ export default function EventSlideshow({
     }
   };
 
+  // Jump straight to an album. With this many albums, stepping through them one
+  // arrow click at a time isn't practical.
+  const selectEvent = (index: number) => {
+    pauseAutoplayOnInteract();
+    setEventDir(index > eventIndex ? 1 : -1);
+    setEventIndex(index);
+  };
+
   // Animation variants
   const slideVariant = {
     enter: (direction: 1 | -1) => ({
@@ -268,22 +276,46 @@ export default function EventSlideshow({
             </motion.p>
           </div>
 
-          {/* Photo dots */}
-          <div className="flex items-center gap-2">
-            {photosForEvent.map((_, i) => (
-              <button
-                key={`dot-${i}`}
-                onClick={() => {
-                  pauseAutoplayOnInteract();
-                  setPhotoDir(i > photoIndex ? 1 : -1);
-                  setPhotoIndex(i);
-                }}
-                aria-label={`Go to photo ${i + 1}`}
-                className={`h-2.5 w-2.5 rounded-full transition ${
-                  i === photoIndex ? "bg-gray-900" : "bg-gray-300 hover:bg-gray-400"
-                }`}
-              />
-            ))}
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Album picker */}
+            <select
+              value={eventIndex}
+              onChange={(e) => selectEvent(Number(e.target.value))}
+              aria-label="Choose an album"
+              className="max-w-full rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-sm text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              {events.map((ev, i) => (
+                <option key={`opt-${i}`} value={i}>
+                  {ev.name}
+                </option>
+              ))}
+            </select>
+
+            {/* Photo position: dots for short albums, a counter once there are
+                too many to render as a row. */}
+            {totalPhotos > 1 &&
+              (totalPhotos <= 12 ? (
+                <div className="flex items-center gap-2">
+                  {photosForEvent.map((_, i) => (
+                    <button
+                      key={`dot-${i}`}
+                      onClick={() => {
+                        pauseAutoplayOnInteract();
+                        setPhotoDir(i > photoIndex ? 1 : -1);
+                        setPhotoIndex(i);
+                      }}
+                      aria-label={`Go to photo ${i + 1}`}
+                      className={`h-2.5 w-2.5 rounded-full transition ${
+                        i === photoIndex ? "bg-gray-900" : "bg-gray-300 hover:bg-gray-400"
+                      }`}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <span className="text-sm text-gray-500 tabular-nums whitespace-nowrap">
+                  Photo {photoIndex + 1} of {totalPhotos}
+                </span>
+              ))}
           </div>
         </div>
 
