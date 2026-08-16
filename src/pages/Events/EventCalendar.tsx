@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import { enUS } from "date-fns/locale/en-US";
 import EventModal from "./EventModal";
+import { findAlbumIndex } from "./albums";
 
 const locales = { "en-US": enUS };
 const localizer = dateFnsLocalizer({ format, parse, startOfWeek, getDay, locales });
@@ -15,13 +16,20 @@ export type Event = {
   title: string;
   location?: string;
   description?: string;
+  /** Index into eventList when this event has a photo album, else null. */
+  albumIndex?: number | null;
+};
+
+type EventCalendarProps = {
+  /** Called when a viewer asks to see an event's photo album. */
+  onAlbumSelect?: (albumIndex: number) => void;
 };
 
 const GoogleCalendarAPIKey = 'AIzaSyCRqQUsiiwCzUGXU3loavI_g2A-NYiaWR0';
 //const calendarId = 'mlb_-m-02%7e_%7e_x_%4diami+%4darlins#sports@group.v.calendar.google.com';
 const calendarId = 'e28c365873c5d4d1a66a9a90570f7bd6c4fc56ae9724a64f77acf53361bd81e1@group.calendar.google.com';
 
-export default function EventCalendar() {
+export default function EventCalendar({ onAlbumSelect }: EventCalendarProps = {}) {
   const [events, setEvents] = useState<Event[]>([]);
   const [view, setView] = useState<"month" | "week" | "day" | "agenda">("month");
   const [date, setDate] = useState(new Date());
@@ -65,12 +73,40 @@ export default function EventCalendar() {
             allDay: isAllDay,
             location: item.location,
             description: item.description,
+            albumIndex: findAlbumIndex(start, end),
           };
         });
 
         setEvents(fetchedEvents);
       });
   }, []);
+
+  // Events with photos get a camera badge. The badge stops propagation so it
+  // jumps straight to the album instead of also opening the details modal.
+  const renderEvent = useCallback(
+    ({ event }: { event: Event }) => (
+      <span className="flex items-center gap-1 min-w-0">
+        {event.albumIndex != null && onAlbumSelect && (
+          <button
+            type="button"
+            title="View photos from this event"
+            aria-label={`View photos from ${event.title}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAlbumSelect(event.albumIndex!);
+            }}
+            className="shrink-0 leading-none cursor-pointer hover:scale-125 transition-transform"
+          >
+            📷
+          </button>
+        )}
+        <span className="truncate">{event.title}</span>
+      </span>
+    ),
+    [onAlbumSelect]
+  );
+
+  const components = useMemo(() => ({ event: renderEvent }), [renderEvent]);
 
   return (
     <div className="bg-gradient-to-br from-blue-200 via-blue-100 to-white rounded-2xl shadow-xl p-6">
@@ -98,6 +134,7 @@ export default function EventCalendar() {
             date={date}
             onNavigate={(d) => setDate(d)}
             views={["month", "week", "day", "agenda"]}
+            components={components}
             onSelectEvent={(event) => {
               setSelectedEvent(event);
               setIsOpen(true);
@@ -107,7 +144,16 @@ export default function EventCalendar() {
       </div>
 
       {selectedEvent && (
-        <EventModal event={selectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />
+        <EventModal
+          event={selectedEvent}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          onViewAlbum={
+            selectedEvent.albumIndex != null && onAlbumSelect
+              ? () => onAlbumSelect(selectedEvent.albumIndex!)
+              : undefined
+          }
+        />
       )}
     </div>
   );

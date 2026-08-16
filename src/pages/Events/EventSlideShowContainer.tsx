@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import EventSlideShow from './EventSlideShow';
 import { eventList } from './Data';
+import type { AlbumSelection } from './useAlbumSelection';
 
 type Props = {
   /** "card" sits inline on the Events page; "page" fills the box it's given. */
   layout?: 'card' | 'page';
+  /** Album to jump to, from the calendar's camera badge. */
+  selected?: AlbumSelection | null;
 };
 
-export default function EventSlideShowContainer({ layout = 'card' }: Props) {
+export default function EventSlideShowContainer({ layout = 'card', selected = null }: Props) {
   const [fullscreen, setFullscreen] = useState(false);
 
   return (
@@ -27,7 +30,7 @@ export default function EventSlideShowContainer({ layout = 'card' }: Props) {
               : 'w-full h-full bg-black flex items-center justify-center text-white'
           }
         >
-          <EventSlideShow events={eventList} layout={layout} />
+          <EventSlideShow events={eventList} layout={layout} selected={selected} />
         </div>
 
         {/* Controls */}
@@ -43,7 +46,7 @@ export default function EventSlideShowContainer({ layout = 'card' }: Props) {
       {fullscreen && (
         <div className="fixed inset-0 bg-black z-50 flex items-center justify-center group">
           <div className="relative w-full h-full">
-            <EventSlideShow events={eventList} layout="overlay" />
+            <EventSlideShow events={eventList} layout="overlay" selected={selected} />
             <button
               onClick={() => setFullscreen(false)}
               className="z-100 cursor-pointer absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 hover:bg-black/60 text-white px-3 py-2 rounded"

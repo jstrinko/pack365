@@ -5,10 +5,13 @@ export default function EventModal({
   event,
   isOpen,
   setIsOpen,
+  onViewAlbum,
 }: {
   event: Event;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  /** Provided only when this event has a photo album. */
+  onViewAlbum?: () => void;
 }) {
   return (
     <Dialog
@@ -32,12 +35,25 @@ export default function EventModal({
             <p className="mt-2 font-medium">Location: {event.location}</p>
           )}
           {event.description && <p className="mt-2">{event.description}</p>}
-          <button
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
-            onClick={() => setIsOpen(false)}
-          >
-            Close
-          </button>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {onViewAlbum && (
+              <button
+                className="px-4 py-2 bg-yellow-400 text-blue-900 font-semibold rounded hover:bg-yellow-300 transition-colors"
+                onClick={() => {
+                  setIsOpen(false);
+                  onViewAlbum();
+                }}
+              >
+                📷 View photos
+              </button>
+            )}
+            <button
+              className="px-4 py-2 bg-blue-600 text-white rounded"
+              onClick={() => setIsOpen(false)}
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </Dialog>

@@ -6,7 +6,7 @@ const eventList: EventItem[] = [
   {
     name: "Scouts Swimming & BBQ",
     description: "We had a wonderful time reconnecting with old friends and meeting new ones at the scouts swimming & BBQ event.",
-    date: new Date("2025-08-19"),
+    date: new Date(2025, 7, 19),
     photos: [
       { path: "/slideshow/IMG_0174.jpg", name: "Pool Area", description: "Kicking off the school year" },
       { path: "/slideshow/IMG_0176.jpg", name: "Enjoying Food and Friends", description: "Great turnout for the swimming event!" },
@@ -15,7 +15,7 @@ const eventList: EventItem[] = [
   {
     name: "Onboarding @ Waters Edge",
     description: "Onboarding new scouts at Waters Edge Elementary",
-    date: new Date("2025-08-21"),
+    date: new Date(2025, 7, 21),
     photos: [
       { path: "/slideshow/IMG_0179.jpg", name: "Onboarding Photo 1", description: "Getting to know each other" },
       { path: "/slideshow/IMG_0181.jpg", name: "Onboarding Photo 2", description: "Team building activities" },
@@ -24,7 +24,7 @@ const eventList: EventItem[] = [
   {
     name: "Onboarding @ Sandpiper Shores",
     description: "Onboarding new scouts at Sandpiper Shores Elementary",
-    date: new Date("2025-08-28"),
+    date: new Date(2025, 7, 28),
     photos: [
       { path: "/slideshow/IMG_0183.jpg", name: "Onboarding Photo 1", description: "Getting to know each other" },
       { path: "/slideshow/IMG_0186.jpg", name: "Onboarding Photo 2", description: "Team building activities" },
@@ -35,7 +35,7 @@ const eventList: EventItem[] = [
   {
     name: "Popcorn Kickoff & Fundraiser",
     description: "The popcorn season, start to finish. After the kickoff the scouts took to the storefronts for the Trail's End sale — seventy percent of every sale stays local, funding a full year of camping, awards, and adventure.",
-    date: new Date("2025-08-30"),
+    date: new Date(2025, 7, 30),
     photos: [
       { path: "/slideshow/IMG_0190.jpg", name: "Popcorn Kickoff 1", description: "Excited scout ready to sell popcorn" },
       { path: "/slideshow/IMG_0192.jpg", name: "Popcorn Kickoff 2", description: "Gaining community support" },
@@ -52,7 +52,7 @@ const eventList: EventItem[] = [
   {
     name: "Museum of Discovery Campout",
     description: "An overnight inside the Museum of Discovery and Science in Fort Lauderdale. Scouts built bridges, anchored the weather desk, explored the aquarium, and rolled out sleeping bags right under the exhibits.",
-    date: new Date("2025-09-26"),
+    date: new Date(2025, 8, 26),
     photos: [
       { path: "/albums/museum-of-discovery/museum-of-discovery-01.jpg", name: "Museum of Discovery Campout 1", description: "At the touch tank" },
       { path: "/albums/museum-of-discovery/museum-of-discovery-02.jpg", name: "Museum of Discovery Campout 2", description: "Plasma: Ripping the Atom" },
@@ -80,7 +80,7 @@ const eventList: EventItem[] = [
   {
     name: "Cub Halloween Camp Out",
     description: "The all-ages Halloween campout at Camp La-No-Che. Costumes, a haunted trail, campfire shows, BB range time, and a weekend of cool-weather camping in the pines.",
-    date: new Date("2025-10-17"),
+    date: new Date(2025, 9, 17),
     photos: [
       { path: "/albums/cub-halloween/cub-halloween-01.jpg", name: "Cub Halloween Camp Out 1", description: "Night hike back to camp" },
       { path: "/albums/cub-halloween/cub-halloween-02.jpg", name: "Cub Halloween Camp Out 2", description: "Dining hall dinner" },
@@ -119,7 +119,7 @@ const eventList: EventItem[] = [
   {
     name: "Scouts Trunk or Treat",
     description: "Families decked out their trunks and the parking lot at Waters Edge Elementary turned into a Halloween midway. Costumes, candy, and some seriously committed decorating.",
-    date: new Date("2025-10-30"),
+    date: new Date(2025, 9, 30),
     photos: [
       { path: "/albums/trunk-or-treat/trunk-or-treat-01.jpg", name: "Scouts Trunk or Treat 1", description: "Buckets ready" },
       { path: "/albums/trunk-or-treat/trunk-or-treat-02.jpg", name: "Scouts Trunk or Treat 2", description: "Clown car selfie" },
@@ -142,7 +142,7 @@ const eventList: EventItem[] = [
   {
     name: "All Ages Camping — Tanah Keeta",
     description: "A full weekend at Tanah Keeta Scout Reservation. Canoeing on the water, hiking the trails, cooking out, and a campfire that brought the whole pack together.",
-    date: new Date("2025-11-07"),
+    date: new Date(2025, 10, 7),
     photos: [
       { path: "/albums/tanah-keeta-november/tanah-keeta-november-01.jpg", name: "All Ages Camping — Tanah Keeta 1", description: "Gaga ball after dark" },
       { path: "/albums/tanah-keeta-november/tanah-keeta-november-02.jpg", name: "All Ages Camping — Tanah Keeta 2", description: "Campfire roaring" },
@@ -216,7 +216,7 @@ const eventList: EventItem[] = [
   {
     name: "Veterans Day Ceremony",
     description: "Pack 365 presented colors and lined the route for the Veterans Day ceremony, flags in hand, honoring those who served.",
-    date: new Date("2025-11-11"),
+    date: new Date(2025, 10, 11),
     photos: [
       { path: "/albums/veterans-day/veterans-day-01.jpg", name: "Veterans Day Ceremony 1", description: "Flags against the ladder truck" },
       { path: "/albums/veterans-day/veterans-day-02.jpg", name: "Veterans Day Ceremony 2", description: "With Palm Beach County Fire Rescue" },
@@ -236,7 +236,7 @@ const eventList: EventItem[] = [
   {
     name: "All Ages Camping — Camp Elmore",
     description: "A weekend at Camp Elmore built around the range: archery, BB guns, and target sports, with lakeside walks and camp cooking in between.",
-    date: new Date("2025-12-05"),
+    date: new Date(2025, 11, 5),
     photos: [
       { path: "/albums/camp-elmore/camp-elmore-01.jpg", name: "All Ages Camping — Camp Elmore 1", description: "Coaching the first shot" },
       { path: "/albums/camp-elmore/camp-elmore-02.jpg", name: "All Ages Camping — Camp Elmore 2", description: "Learning the draw" },
@@ -311,7 +311,7 @@ const eventList: EventItem[] = [
   {
     name: "Pack 365 Community Service Project",
     description: "The pack showed up at Sandpiper Shores Elementary to rebuild the school garden — hauling mulch, clearing beds, planting, and watering. A good, muddy morning of giving back.",
-    date: new Date("2026-01-11"),
+    date: new Date(2026, 0, 11),
     photos: [
       { path: "/albums/service-project/service-project-01.jpg", name: "Pack 365 Community Service Project 1", description: "Breaking ground on the garden" },
       { path: "/albums/service-project/service-project-02.jpg", name: "Pack 365 Community Service Project 2", description: "Raking out the beds" },
@@ -349,7 +349,7 @@ const eventList: EventItem[] = [
   {
     name: "All Ages Camping — WDW Fort Wilderness",
     description: "Three nights at Disney's Fort Wilderness over a cold snap. Horseback riding, canoes, tie-dye, the Hoop-Dee-Doo Revue, campfire singalongs, and deer wandering through camp.",
-    date: new Date("2026-01-16"),
+    date: new Date(2026, 0, 16),
     photos: [
       { path: "/albums/ft-wilderness/ft-wilderness-01.jpg", name: "All Ages Camping — WDW Fort Wilderness 1", description: "Deer beside the road" },
       { path: "/albums/ft-wilderness/ft-wilderness-02.jpg", name: "All Ages Camping — WDW Fort Wilderness 2", description: "Warming up by the fire" },
@@ -401,7 +401,7 @@ const eventList: EventItem[] = [
   {
     name: "All Ages Camping — Scoutmasters Camporee",
     description: "The Scoutmasters Camporee at Markham Park. Pioneering projects and lashings, camp games, a big cookout, and wildlife along the water at sunset.",
-    date: new Date("2026-02-13"),
+    date: new Date(2026, 1, 13),
     photos: [
       { path: "/albums/scoutmasters-camporee/scoutmasters-camporee-01.jpg", name: "All Ages Camping — Scoutmasters Camporee 1", description: "Arriving at the camporee" },
       { path: "/albums/scoutmasters-camporee/scoutmasters-camporee-02.jpg", name: "All Ages Camping — Scoutmasters Camporee 2", description: "Around the fire at night" },
@@ -428,7 +428,7 @@ const eventList: EventItem[] = [
   {
     name: "Blue & Gold Dinner",
     description: "The Blue & Gold banquet at Waters Edge Elementary — the pack's birthday party. A potluck spread, a Pack 365 cake, gold balloons, and awards all around.",
-    date: new Date("2026-02-26"),
+    date: new Date(2026, 1, 26),
     photos: [
       { path: "/albums/blue-and-gold/blue-and-gold-01.jpg", name: "Blue & Gold Dinner 1", description: "Dinner in the cafeteria" },
       { path: "/albums/blue-and-gold/blue-and-gold-02.jpg", name: "Blue & Gold Dinner 2", description: "Plates full at the table" },
@@ -448,7 +448,7 @@ const eventList: EventItem[] = [
   {
     name: "Pinewood Derby & MMT Hike",
     description: "Campout weekend at Tanah Keeta with the main event: the Pinewood Derby. Cars weighed in, the track went up, and between heats there was gaga ball, hiking, and s'mores.",
-    date: new Date("2026-03-13"),
+    date: new Date(2026, 2, 13),
     photos: [
       { path: "/albums/pinewood-derby/pinewood-derby-01.jpg", name: "Pinewood Derby & MMT Hike 1", description: "Gaga ball at the campsite" },
       { path: "/albums/pinewood-derby/pinewood-derby-02.jpg", name: "Pinewood Derby & MMT Hike 2", description: "Working on the cars" },
@@ -478,7 +478,7 @@ const eventList: EventItem[] = [
   {
     name: "Kennedy Space Center Overnight",
     description: "An overnight at the Kennedy Space Center Visitor Complex. Scouts took on engineering challenges, climbed into the shuttle simulators, met the Orion capsule, and slept beneath the rockets.",
-    date: new Date("2026-04-11"),
+    date: new Date(2026, 3, 11),
     photos: [
       { path: "/albums/kennedy-space-center/kennedy-space-center-01.jpg", name: "Kennedy Space Center Overnight 1", description: "Arriving at the visitor complex" },
       { path: "/albums/kennedy-space-center/kennedy-space-center-02.jpg", name: "Kennedy Space Center Overnight 2", description: "At the NASA globe" },
@@ -536,7 +536,7 @@ const eventList: EventItem[] = [
   {
     name: "Pack & Den Meetings",
     description: "A year of Pack 365 den meetings and awards ceremonies across Waters Edge and Sandpiper Shores, plus nature-trail hikes and craft nights. Rank badges, belt loops, and a lot of friends made along the way.",
-    date: new Date("2026-05-14"),
+    date: new Date(2026, 4, 14),
     photos: [
       { path: "/albums/pack-meetings/pack-meetings-01.jpg", name: "Pack & Den Meetings 1", description: "Den meeting around the table" },
       { path: "/albums/pack-meetings/pack-meetings-02.jpg", name: "Pack & Den Meetings 2", description: "Color guard at the pack meeting" },

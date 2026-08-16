@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import type { AlbumSelection } from "./useAlbumSelection";
 
 export type Photo = {
   path: string;
@@ -28,6 +29,8 @@ export type SlideShowProps = {
   photoInterval?: number; // ms; default 2000
   className?: string;
   layout?: SlideShowLayout;
+  /** Jump to an album on request (e.g. from the calendar's camera badge). */
+  selected?: AlbumSelection | null;
 };
 
 const clampIndex = (i: number, len: number) => ((i % len) + len) % len;
@@ -38,6 +41,7 @@ export default function EventSlideshow({
   photoInterval = 2000,
   className = "",
   layout = "card",
+  selected = null,
 }: SlideShowProps) {
   const totalEvents = events.length;
   const [eventIndex, setEventIndex] = useState(0);
@@ -62,6 +66,17 @@ export default function EventSlideshow({
   useEffect(() => {
     setPhotoIndex(0);
   }, [eventIndex]);
+
+  // Jump to an externally requested album and hold there, so it doesn't rotate
+  // away while the viewer is looking at what they asked for.
+  useEffect(() => {
+    if (!selected || totalEvents === 0) return;
+    setEventDir(1);
+    setEventIndex(clampIndex(selected.index, totalEvents));
+    setPhotoIndex(0);
+    setAutoPlay(false);
+    setUserInteracted(true);
+  }, [selected, totalEvents]);
 
   // Auto-cycle events
   useEffect(() => {
