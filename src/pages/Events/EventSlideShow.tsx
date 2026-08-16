@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import type { AlbumSelection } from "./useAlbumSelection";
 
 export type Photo = {
   path: string;
@@ -15,12 +16,21 @@ export type EventItem = {
   photos: Photo[];
 };
 
+/**
+ * card    – embedded viewer sized to its own fixed height (the Events page)
+ * page    – fills whatever box the parent gives it (the Gallery page)
+ * overlay – covers the viewport (the expand button)
+ */
+export type SlideShowLayout = "card" | "page" | "overlay";
+
 export type SlideShowProps = {
   events: EventItem[];
   eventInterval?: number; // ms; default 5000
   photoInterval?: number; // ms; default 2000
   className?: string;
-  fullScreen?: boolean;
+  layout?: SlideShowLayout;
+  /** Jump to an album on request (e.g. from the calendar's camera badge). */
+  selected?: AlbumSelection | null;
 };
 
 const clampIndex = (i: number, len: number) => ((i % len) + len) % len;
@@ -30,7 +40,8 @@ export default function EventSlideshow({
   eventInterval = 6000,
   photoInterval = 2000,
   className = "",
-  fullScreen = false,
+  layout = "card",
+  selected = null,
 }: SlideShowProps) {
   const totalEvents = events.length;
   const [eventIndex, setEventIndex] = useState(0);
@@ -55,6 +66,17 @@ export default function EventSlideshow({
   useEffect(() => {
     setPhotoIndex(0);
   }, [eventIndex]);
+
+  // Jump to an externally requested album and hold there, so it doesn't rotate
+  // away while the viewer is looking at what they asked for.
+  useEffect(() => {
+    if (!selected || totalEvents === 0) return;
+    setEventDir(1);
+    setEventIndex(clampIndex(selected.index, totalEvents));
+    setPhotoIndex(0);
+    setAutoPlay(false);
+    setUserInteracted(true);
+  }, [selected, totalEvents]);
 
   // Auto-cycle events
   useEffect(() => {
@@ -165,12 +187,26 @@ export default function EventSlideshow({
   const current = events[eventIndex];
   const currentPhoto = photosForEvent[photoIndex];
 
+  // `page` and `overlay` are flex columns so the image takes whatever height is
+  // left after the info panel, rather than a fixed height that can overflow.
+  const containerClass = {
+    card: `relative w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl bg-white group ${className}`,
+    page: `relative w-full h-full flex flex-col rounded-2xl overflow-hidden shadow-xl bg-white group ${className}`,
+    overlay: `fixed inset-0 z-50 w-full h-full flex flex-col bg-white`,
+  }[layout];
+
+  // min-h floors (rather than min-h-0) keep the image area from collapsing to
+  // nothing if an ancestor's height doesn't resolve.
+  const imageClass = {
+    card: "relative h-[28rem] md:h-[32rem] bg-gray-100",
+    page: "relative flex-1 min-h-[18rem] bg-gray-100",
+    overlay: "relative flex-1 min-h-[18rem] bg-gray-100",
+  }[layout];
+
   return (
-    <div
-      className={fullScreen ? `fixed inset-0 z-50 w-full h-full bg-white` : `relative w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl bg-white group ${className}`}
-    >
+    <div className={containerClass}>
       {/* Image area */}
-      <div className={fullScreen ? `relative w-full h-[50rem] bg-gray-100` : `relative h-[28rem] md:h-[32rem] bg-gray-100`}>
+      <div className={imageClass}>
         <AnimatePresence custom={eventDir} mode="wait">
           {/* Wrap event layer so that changing events triggers a subtle slide */}
           <motion.div

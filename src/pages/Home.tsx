@@ -3,8 +3,11 @@ import SignupForm from './Home/SignupForm';
 import EventCalendar from './Events/EventCalendar';
 import EventSlideShowContainer from "./Events/EventSlideShowContainer";
 import JoinNowBlurb from "./Home/JoinNowBlurb";
+import { useAlbumSelection } from "./Events/useAlbumSelection";
 
 export default function Home() {
+  const { selectedAlbum, selectAlbum, slideshowRef } = useAlbumSelection();
+
   return (
     <PageLayout>
       <section className="max-w-3xl w-full mx-auto mb-8">
@@ -29,11 +32,15 @@ export default function Home() {
       <section className="w-full mx-auto mb-8 max-w-3xl">
         <h3 className="text-xl font-semibold mb-2">Events</h3>
         <p>Here are the exciting campouts, meetups, and ceremonies scheduled for this scouting year! Join us for a ton of fun!</p>
-        <div><EventCalendar /></div>
+        <p className="text-sm text-gray-600 mt-1 mb-1">Events marked 📷 have photos — click the camera to jump to that album.</p>
+        <div><EventCalendar onAlbumSelect={selectAlbum} /></div>
       </section>
 
-      <section className="relative w-full max-w-3xl mx-auto overflow-hidden rounded-2xl shadow-lg">
-        <EventSlideShowContainer />
+      <section
+        ref={slideshowRef}
+        className="relative w-full max-w-3xl mx-auto overflow-hidden rounded-2xl shadow-lg scroll-mt-4"
+      >
+        <EventSlideShowContainer selected={selectedAlbum} />
       </section>
 
     </PageLayout>
