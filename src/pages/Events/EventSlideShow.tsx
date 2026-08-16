@@ -180,10 +180,12 @@ export default function EventSlideshow({
     overlay: `fixed inset-0 z-50 w-full h-full flex flex-col bg-white`,
   }[layout];
 
+  // min-h floors (rather than min-h-0) keep the image area from collapsing to
+  // nothing if an ancestor's height doesn't resolve.
   const imageClass = {
     card: "relative h-[28rem] md:h-[32rem] bg-gray-100",
-    page: "relative flex-1 min-h-0 bg-gray-100",
-    overlay: "relative flex-1 min-h-0 bg-gray-100",
+    page: "relative flex-1 min-h-[18rem] bg-gray-100",
+    overlay: "relative flex-1 min-h-[18rem] bg-gray-100",
   }[layout];
 
   return (

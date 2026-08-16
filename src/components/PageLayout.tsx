@@ -6,7 +6,12 @@ type PageLayoutProps = {
   heroImage?: string; // optional banner image for the page
   heroAlt?: string;
   showHero?: boolean; // pages that need the vertical space can opt out
-  fillHeight?: boolean; // let children stretch instead of sizing to content
+  /**
+   * By default <main> is shrink-to-fit (auto margins beat stretch in a column
+   * flex container), so it sizes to its widest child and centres. Pages that
+   * want the full max-w-7xl box opt in here.
+   */
+  fullWidth?: boolean;
 };
 
 export default function PageLayout({
@@ -14,7 +19,7 @@ export default function PageLayout({
   heroImage,
   heroAlt,
   showHero = true,
-  fillHeight = false,
+  fullWidth = false,
 }: PageLayoutProps) {
   if (!heroImage) {
     const num = Math.floor(Math.random() * 8) + 1;
@@ -34,11 +39,7 @@ export default function PageLayout({
         </div>
       )}
 
-      <main
-        className={`flex-grow w-full max-w-7xl mx-auto p-4${
-          fillHeight ? " flex flex-col min-h-0" : ""
-        }`}
-      >
+      <main className={`flex-grow max-w-7xl mx-auto p-4${fullWidth ? " w-full" : ""}`}>
         {children}
       </main>
       <Footer />

@@ -8,7 +8,7 @@ export default function Gallery() {
 
   return (
     // No hero here: the viewer should be visible without scrolling.
-    <PageLayout showHero={false} fillHeight>
+    <PageLayout showHero={false} fullWidth>
       <div className="mb-4">
         <h2 className="text-2xl font-bold">Photo Gallery</h2>
         <p className="text-gray-700">
@@ -18,8 +18,13 @@ export default function Gallery() {
         </p>
       </div>
 
-      {/* Fills the space between the header and the footer. */}
-      <div className="flex-1 min-h-[30rem]">
+      {/*
+        An explicit height, not flex-1: the viewer's inner h-full/flex-1 chain
+        needs a definite height to resolve against, and a percentage chain
+        rooted in a flex-grown ancestor collapses the image area to zero.
+        The subtracted space covers the header, this intro block, and the footer.
+      */}
+      <div className="h-[calc(100vh-17rem)] min-h-[26rem]">
         <EventSlideShowContainer layout="page" />
       </div>
     </PageLayout>
