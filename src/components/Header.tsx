@@ -7,6 +7,7 @@ export default function Header() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/events", label: "Events" },
+    { href: "/gallery", label: "Gallery" },
     { href: "/signup", label: "Join" },
     { href: "/info", label: "Scouting Info" },
   ];
